@@ -12,6 +12,7 @@ DEADLINE=5
 NRACKS=2
 NHOSTSPERRACK=4
 NUSERS=1
+LAB=false
 
 # NOTE: this must match between ./run and ./scripts/postProcessTraceFiles.sh
 RESULTS_DIR_PREFIX=simulation
@@ -26,6 +27,7 @@ usage()
     echo "./run"
     echo "    -h --help"
     echo "    -b --batch=$BATCH"
+    echo "    -l --lab=$LAB"
     echo "    -s --scheduler=$SCHEDULER"
     echo "    -top --topology=$TOPOLOGY"
     echo "    -d --deadline=$DEADLINE"
@@ -50,6 +52,11 @@ while [ "$1" != "" ]; do
             BATCH=true
             GRAPHICAL=false
             ;;
+	-l | --lab)
+	    LAB=true
+            BATCH=true
+            GRAPHICAL=false
+	    ;;
         -t | --trace-dir)
            TRACES_DIR=$ROOT_DIR/$VALUE
             ;;
@@ -115,7 +122,13 @@ do
     echo "***********************"
 
     STARTTIME=$(date +%s)
-    RESULTS_DIR=$TRACES_DIR/$RESULTS_DIR_PREFIX-$(date +%Y-%m-%d.%H.%M.%S)
+    if [ "$LAB" = false ]
+    then
+        RESULTS_DIR=$TRACES_DIR/$RESULTS_DIR_PREFIX-$(date +%Y-%m-%d.%H.%M.%S)
+    else        
+        RESULTS_DIR=$TRACES_DIR
+    fi
+
     mkdir -p $RESULTS_DIR
     echo "load real user system maxMem"> $RESULTS_DIR/time.out
 
