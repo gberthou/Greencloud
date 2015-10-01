@@ -40,11 +40,13 @@ def analyzeResults(filename, simulations):
 			f.write("%d,%f,%f\n" % (simu.servercount, serversEnergy, totalEnergy))
 	print("Done!")
 
+PREFIX = "ServerEnergy"
+
 currenttime = int(time.time()*1000)
 
-simus = [Simu(i, "ServerEnergy_%d_%d" % (currenttime, i)) for i in range(MIN_SERVER_COUNT, MAX_SERVER_COUNT + 1, PACE_SERVER_COUNT)]
+simus = [Simu(i, "%s_%d_%d" % (PREFIX, currenttime, i)) for i in range(MIN_SERVER_COUNT, MAX_SERVER_COUNT + 1, PACE_SERVER_COUNT)]
 
-sim.ClearTraces()
+sim.ClearTraces(PREFIX)
 for simu in simus:
 	print("Processing %s..." % simu.name)
 	sim.LaunchSim(simu.name, 1, simu.servercount, 1)

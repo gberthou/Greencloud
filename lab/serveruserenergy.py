@@ -45,11 +45,11 @@ def analyzeResults(filename, simulations):
 	print("Done!")
 
 currenttime = int(time.time()*1000)
-prefix = "ServerUserEnergy"
+PREFIX = "ServerUserEnergy"
 
-simus = [Simu(i, j, "%s_%d_%d_%d" % (prefix, currenttime, i, j)) for j in range(MIN_USER_COUNT, MAX_USER_COUNT + 1, PACE_USER_COUNT) for i in range(MIN_SERVER_COUNT, MAX_SERVER_COUNT + 1, PACE_SERVER_COUNT)]
+simus = [Simu(i, j, "%s_%d_%d_%d" % (PREFIX, currenttime, i, j)) for j in range(MIN_USER_COUNT, MAX_USER_COUNT + 1, PACE_USER_COUNT) for i in range(MIN_SERVER_COUNT, MAX_SERVER_COUNT + 1, PACE_SERVER_COUNT)]
 
-sim.ClearTraces(prefix)
+sim.ClearTraces(PREFIX)
 for simu in simus:
 	print("Processing %s..." % simu.name)
 	sim.LaunchSim(simu.name, 1, simu.servercount, simu.usercount)
