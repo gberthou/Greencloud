@@ -13,5 +13,5 @@ def LaunchSim(tracedir, rackcount, serversperrack, usercount):
 	print(command)
 	os.system(command)
 
-def ClearTraces():
-	os.system("rm -rf trace/*")
+def ClearTraces(prefix):
+	os.system("rm -rf trace/%s_*" % prefix)
