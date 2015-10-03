@@ -13,6 +13,7 @@ NRACKS=2
 NHOSTSPERRACK=4
 NUSERS=1
 LAB=false
+DC_LOAD="0.3"
 
 # NOTE: this must match between ./run and ./scripts/postProcessTraceFiles.sh
 RESULTS_DIR_PREFIX=simulation
@@ -37,6 +38,7 @@ usage()
     echo "    -rc --racks=$NRACKS"
     echo "    -spr --serversperrack=$NHOSTSPERRACK"
     echo "    -u --users=$NUSERS"
+    echo "    -lo --load=$DC_LOAD"
     echo ""
 }
  
@@ -84,6 +86,9 @@ while [ "$1" != "" ]; do
     	-u | --users)
 			NUSERS=$VALUE
 	    ;;
+    	-lo | --load)
+			DC_LOAD=$VALUE
+	    ;;
         *)
             echo "ERROR: unknown parameter \"$PARAM\""
             usage
@@ -111,7 +116,7 @@ runNumber=1
 
 
 # Data center average load
-for load in  "0.3" # "0.0001" "0.1" "0.2" "0.3" "0.4" "0.5" "0.6" "0.7" "0.8" "0.9" "1.0"
+for load in  "$DC_LOAD" # "0.0001" "0.1" "0.2" "0.3" "0.4" "0.5" "0.6" "0.7" "0.8" "0.9" "1.0"
 do
 #for deadline in "1" "2" "5" "10" "20"
 #do

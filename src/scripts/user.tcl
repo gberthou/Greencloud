@@ -12,6 +12,7 @@ set top(NCloudUsers)  [lindex $argv 9]
 
 # Compute task generation rate
 set task(genrate) [expr [$DCenter set mips_capacity_]/$task(mips)*$dc(target_load)]	;# Number of tasks to be generated per second to maintain target Data Center load
+
 set task(netrate) [expr $task(genrate)*$task(size)*8]					;# Required bitrate
 
 # Creating Cloud Users

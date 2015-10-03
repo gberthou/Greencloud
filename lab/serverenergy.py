@@ -19,24 +19,13 @@ class Simu:
 		self.servercount = servercount
 		self.name = name
 
-def getdata(filename):
-	serversEnergy = 0.0
-	totalEnergy = 0.0
-	with open(filename, "r") as f:
-		for line in f:
-			fields = line.split(' ')
-			if fields[0] == "energy.servers":
-				serversEnergy = float(fields[1])
-			totalEnergy += float(fields[1])
-	return (serversEnergy, totalEnergy)
-
 def analyzeResults(filename, simulations):
 	print("Results analysis...")
 	with open(filename, "w") as f:
 		f.write("Server count,Servers energy,Total energy\n")
 		for simu in simulations:
 			datafilename = "trace/%s/energySummary.tr" % simu.name
-			serversEnergy, totalEnergy = getdata(datafilename)
+			serversEnergy, totalEnergy = sim.GetdataEnergy(datafilename)
 			f.write("%d,%f,%f\n" % (simu.servercount, serversEnergy, totalEnergy))
 	print("Done!")
 
